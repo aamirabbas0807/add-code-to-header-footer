@@ -41,14 +41,17 @@ register_deactivation_hook( __FILE__, array( 'ACHF_Deactivator', 'deactivate' ) 
 function achf_run_plugin() {
     $loader = new ACHF_Loader();
 
-    // Create admin class instance
+    // Admin functionality
     $plugin_admin = new ACHF_Admin( 'add-code-to-header-footer', ACHF_VERSION );
-
-    // Register admin hooks
     $loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu' );
     $loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
 
-    // Run loader to register hooks
+    // Public functionality
+    $plugin_public = new ACHF_Public( 'add-code-to-header-footer', ACHF_VERSION );
+    $loader->add_action( 'wp_head', $plugin_public, 'insert_code_in_header' );
+    $loader->add_action( 'wp_footer', $plugin_public, 'insert_code_in_footer' );
+
+    // Run loader to register everything
     $loader->run();
 }
 achf_run_plugin();
