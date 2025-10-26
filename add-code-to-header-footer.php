@@ -28,6 +28,9 @@ define( 'ACHF_PLUGIN_URL', plugin_dir_url( __FILE__ ) ); // URL to plugin folder
  */
 require_once ACHF_PLUGIN_DIR . 'includes/class-achf-activator.php';
 require_once ACHF_PLUGIN_DIR . 'includes/class-achf-deactivator.php';
+require_once ACHF_PLUGIN_DIR . 'includes/class-achf-loader.php';
+require_once ACHF_PLUGIN_DIR . 'includes/class-achf-admin.php';
+require_once ACHF_PLUGIN_DIR . 'includes/class-achf-public.php';
 
 /**
  * Register activation and deactivation hooks
