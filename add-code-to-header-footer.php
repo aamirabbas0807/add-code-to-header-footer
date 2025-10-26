@@ -39,7 +39,17 @@ register_deactivation_hook( __FILE__, array( 'ACHF_Deactivator', 'deactivate' ) 
  * Begin execution of the plugin
  */
 function achf_run_plugin() {
-    // This is where we’ll initialize everything later (admin page, frontend hooks, etc.)
+    $loader = new ACHF_Loader();
+
+    // Create admin class instance
+    $plugin_admin = new ACHF_Admin( 'add-code-to-header-footer', ACHF_VERSION );
+
+    // Register admin hooks
+    $loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu' );
+    $loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
+
+    // Run loader to register hooks
+    $loader->run();
 }
 achf_run_plugin();
 
